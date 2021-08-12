@@ -22,7 +22,7 @@ pipeline {
       steps {
         sh '''node server.js &
 sleep 5 &&
-curl localhost:8080
+curl localhost:8082
 if [[ "x$?" == "x0" ]]; 
 then    echo good; 
 else exit 1; 
