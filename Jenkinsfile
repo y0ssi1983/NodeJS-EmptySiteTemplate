@@ -39,8 +39,9 @@ fi'''
         }
 
         stage('notify slack') {
+          def attachments = """[ { \"text\": \"And here’s an attachment!\" } ]"""
           steps {
-           slackSend (channel: 'devops_december2020', color: '#3EA652', message: "${env.JOB_NAME} #${env.BUILD_NUMBER} -  Started By ${env.BUILD_USER} (${env.BUILD_URL})")
+           slackSend (channel: 'devops_december2020', color: '#3EA652', message: "${env.JOB_NAME} #${env.BUILD_NUMBER} -  Started By ${env.BUILD_USER} (${env.BUILD_URL})", attachments: attachments)
           }
         }
 
