@@ -31,19 +31,8 @@ fi'''
     }
 
     stage('Package Code') {
-      parallel {
-        stage('Package Code') {
-          steps {
-            sh 'tar -czvf node.tar.gz * '
-          }
-        }
-
-        stage('notify slack') {
-          steps {
-            slackSend(channel: 'devops_december2020', color: '#3EA652', message: "${env.JOB_NAME} #${env.BUILD_NUMBER} -  Started By ${env.BUILD_USER} (${env.BUILD_URL})", attachments: '""', blocks: '""')
-          }
-        }
-
+      steps {
+        sh 'tar -czvf node.tar.gz * '
       }
     }
 
