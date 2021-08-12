@@ -40,7 +40,7 @@ fi'''
 
         stage('notify slack') {
           steps {
-            slackSend(channel: 'devops_december2020', color: '#3EA652', blocks: 'job success', attachments: 'joblog')
+            slackSend(channel: 'devops_december2020', color: '#3EA652', message: 'job success')
           }
         }
 
