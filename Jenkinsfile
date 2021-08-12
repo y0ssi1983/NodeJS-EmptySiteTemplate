@@ -48,6 +48,7 @@ fi'''
         stage('Slack Send') {
           steps {
             sleep 1
+            slackSend channel: 'devops_december2020', color: '#3EA652', message: 'job success'
           }
         }
 
