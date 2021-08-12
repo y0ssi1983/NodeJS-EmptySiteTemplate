@@ -39,9 +39,8 @@ fi'''
         }
 
         stage('notify slack') {
-          
           steps {
-           slackSend (channel: 'devops_december2020', color: '#3EA652', message: "${env.JOB_NAME} #${env.BUILD_NUMBER} -  Started By ${env.BUILD_USER} (${env.BUILD_URL})", attachments: "")
+            slackSend(channel: 'devops_december2020', color: '#3EA652', message: "${env.JOB_NAME} #${env.BUILD_NUMBER} -  Started By ${env.BUILD_USER} (${env.BUILD_URL})", attachments: '""', blocks: '""')
           }
         }
 
