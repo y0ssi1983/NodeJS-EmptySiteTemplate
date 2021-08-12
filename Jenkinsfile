@@ -34,13 +34,13 @@ fi'''
       parallel {
         stage('Package Code') {
           steps {
-            sh 'tar -czvf node.tar.gz . '
+            sh 'tar -czvf node.tar.gz * '
           }
         }
 
         stage('notify slack') {
           steps {
-            slackSend(channel: 'devops_december2020', failOnError: true, color: '#3EA652', blocks: '"${env.JOB_NAME} #${env.BUILD_NUMBER} - " + buildStatus + " Started By ${env.BUILD_USER} (${env.BUILD_URL})")', attachments: 'joblog')
+            slackSend(channel: 'devops_december2020', color: '#3EA652', blocks: 'job success', attachments: 'joblog')
           }
         }
 
