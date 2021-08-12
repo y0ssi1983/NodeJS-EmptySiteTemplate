@@ -48,10 +48,17 @@ fi'''
         stage('Slack Send') {
           steps {
             sleep 1
-            slackSend channel: 'devops_december2020', color: '#3EA652', message: "${env.JOB_NAME} #${env.BUILD_NUMBER} - Started By ${env.BUILD_USER} (${env.BUILD_URL})"
+            slackSend(channel: 'devops_december2020', color: '#3EA652', message: "${env.JOB_NAME} #${env.BUILD_NUMBER} - Started By ${env.BUILD_USER} (${env.BUILD_URL})")
           }
         }
 
+      }
+    }
+
+    stage('run script') {
+      steps {
+        sh '''chmod 777 test.sh && 
+./test.sh'''
       }
     }
 
