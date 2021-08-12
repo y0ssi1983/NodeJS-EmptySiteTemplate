@@ -9,7 +9,6 @@ pipeline {
     stage('Check Out Code') {
       steps {
         git(url: 'https://github.com/lidorg-dev/NodeJS-EmptySiteTemplate.git', branch: 'master', poll: true, changelog: true)
-        cleanWs(cleanWhenSuccess: true, cleanWhenAborted: true, cleanWhenFailure: true)
       }
     }
 
@@ -51,6 +50,7 @@ fi'''
     stage('Publish the Archive') {
       steps {
         archiveArtifacts 'node.tar.gz'
+        cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenSuccess: true, cleanWhenUnstable: true)
       }
     }
 
