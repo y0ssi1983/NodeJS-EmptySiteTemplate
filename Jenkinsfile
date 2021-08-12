@@ -37,9 +37,20 @@ fi'''
     }
 
     stage('Publish the Archive') {
-      steps {
-        archiveArtifacts 'node.tar.gz'
-        cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenSuccess: true, cleanWhenUnstable: true)
+      parallel {
+        stage('Publish the Archive') {
+          steps {
+            archiveArtifacts 'node.tar.gz'
+            cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenSuccess: true, cleanWhenUnstable: true)
+          }
+        }
+
+        stage('Slack Send') {
+          steps {
+            sleep 1
+          }
+        }
+
       }
     }
 
