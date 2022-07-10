@@ -41,10 +41,10 @@ pipeline {
           steps {
             sh '''sleep 5
 curl localhost:8081
-if [[ $(echo #?) == 0 ]]
+if $(echo #?) -eq 0;
 then
   echo "success"
-  ps -ef | grep node | awk \'{print$2}\' | kill
+  ps -ef | grep node | awk \'{print$2}\' | xargs kill
   exit 0
 else
   echo "failure"
