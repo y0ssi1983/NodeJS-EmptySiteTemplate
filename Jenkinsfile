@@ -30,8 +30,28 @@ pipeline {
     }
 
     stage('Test App') {
-      steps {
-        sh 'node server.js &'
+      parallel {
+        stage('Run the App') {
+          steps {
+            sh 'node server.js'
+          }
+        }
+
+        stage('check if app is running') {
+          steps {
+            sh '''curl localhost:8081
+if [[ $(echo #?) == 0 ]]
+then
+  echo "success"
+  ps -ef | grep node | awk \'{print$2}\' | kill
+  exit 0
+else
+  echo "failure"
+  exit 1
+fi'''
+          }
+        }
+
       }
     }
 
