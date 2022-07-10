@@ -33,7 +33,7 @@ pipeline {
       parallel {
         stage('Run the App') {
           steps {
-            sh "node server.js &"
+            sh 'node server.js'
           }
         }
 
@@ -41,7 +41,7 @@ pipeline {
           steps {
             sh '''sleep 5
 curl localhost:8081
-if [[ $(echo #?) -eq 0 ]];
+if [ $(echo #?) -eq 0 ];
 then
   echo "success"
   ps -ef | grep node | awk \'{print$2}\' | head -n 1 | xargs kill
