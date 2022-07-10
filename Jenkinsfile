@@ -34,8 +34,9 @@ pipeline {
         stage('Run the App') {
           steps {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-            sh 'node server.js'
+              sh 'node server.js'
             }
+
           }
         }
 
@@ -55,6 +56,21 @@ fi'''
           }
         }
 
+      }
+    }
+
+    stage('Package') {
+      steps {
+        sh '''mkdir target && rsync -Rr . target/
+tar -xzvf package-$BUILD_ID.tar.gz target/
+'''
+      }
+    }
+
+    stage('archive artifact') {
+      steps {
+        archiveArtifacts '*.tar.gz'
+        sh 'rm -rf *'
       }
     }
 
