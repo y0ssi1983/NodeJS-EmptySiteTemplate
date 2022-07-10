@@ -10,7 +10,6 @@ pipeline {
       parallel {
         stage('checkout-code') {
           steps {
-            cleanWS()
             git(url: 'git@github.com:y0ssi1983/NodeJS-EmptySiteTemplate.git', branch: 'master', credentialsId: 'github')
           }
         }
