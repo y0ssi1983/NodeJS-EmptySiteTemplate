@@ -33,7 +33,7 @@ pipeline {
       parallel {
         stage('Run the App') {
           steps {
-            sh 'node server.js'
+            sh 'node server.js &'
           }
         }
 
